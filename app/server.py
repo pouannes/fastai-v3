@@ -30,7 +30,7 @@ async def setup_learner():
     defaults.device = torch.device('cpu')
     data_bunch = ImageDataBunch.single_from_classes(path, classes,
         tfms=get_transforms(), size=224).normalize(imagenet_stats)
-    learn = create_cnn(data_bunch, models.resnet34, pretrained=False)
+    learn = create_cnn(data_bunch, models.resnet50, pretrained=False)
     learn.load(model_file_name)
     return learn
 
