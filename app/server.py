@@ -8,8 +8,8 @@ from io import BytesIO
 from fastai import *
 from fastai.vision import *
 
-model_file_url = 'https://www.dropbox.com/s/dw2f68cwhmv6v47/m-3.pth?dl=1'
-model_file_name = 'm-3'
+model_file_url = 'https://www.dropbox.com/s/2edrboswuoe6ge2/export.pkl?dl=1'
+model_file_name = 'export'
 
 classes = ["anger", "contempt", "disgust", "fear", "happy", "sadness", "surprise"]
 path = Path(__file__).parent
@@ -26,12 +26,9 @@ async def download_file(url, dest):
             with open(dest, 'wb') as f: f.write(data)
 
 async def setup_learner():
-    await download_file(model_file_url, path/'models'/f'{model_file_name}.pth')
-    defaults.device = torch.device('cpu')
-    data_bunch = ImageDataBunch.single_from_classes(path, classes,
-        tfms=get_transforms(), size=224).normalize(imagenet_stats)
-    learn = create_cnn(data_bunch, models.resnet50, pretrained=False)
-    learn.load(model_file_name)
+    await download_file(model_file_url, path/'models'/f'{model_file_name}.pkl')
+    defaults.device = torch.device('cpu')   
+    learn = load_learner(path/'models', f'{model_file_name}.pkl')
     return learn
 
 loop = asyncio.get_event_loop()
