@@ -1,9 +1,7 @@
--f https://download.pytorch.org/whl/nightly/cpu/torch_nightly.html
-torch_nightly
-numpy
-fastai
-starlette
-uvicorn
-python-multipart
-aiofiles
-aiohttp
+numpy==1.15.4
+fastai==1.0.41
+starlette==0.9.10
+uvicorn==0.3.30
+python-multipart==0.0.5
+aiofiles==0.4.0
+aiohttp==3.5.4
