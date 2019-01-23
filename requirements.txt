@@ -1,5 +1,5 @@
 numpy==1.15.4
-fastai==1.0.41
+fastai
 starlette==0.9.10
 uvicorn==0.3.30
 python-multipart==0.0.5

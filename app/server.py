@@ -11,7 +11,7 @@ from fastai.vision import *
 model_file_url = 'https://www.dropbox.com/s/2edrboswuoe6ge2/export.pkl?dl=1'
 model_file_name = 'export'
 
-classes = ["anger", "contempt", "disgust", "fear", "happy", "sadness", "surprise"]
+# classes = ["anger", "contempt", "disgust", "fear", "happy", "sadness", "surprise"]
 path = Path(__file__).parent
 
 app = Starlette()
@@ -26,9 +26,8 @@ async def download_file(url, dest):
             with open(dest, 'wb') as f: f.write(data)
 
 async def setup_learner():
-    await download_file(model_file_url, path/'models'/f'{model_file_name}.pkl')
-    defaults.device = torch.device('cpu')   
-    learn = load_learner(path/'models', f'{model_file_name}.pkl')
+    await download_file(model_file_url, path/'models'/f'{model_file_name}.pkl')   
+    learn = load_learner(path/'models', f'{model_file_name}.pkl', device='cpu')
     return learn
 
 loop = asyncio.get_event_loop()
